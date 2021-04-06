@@ -1,0 +1,124 @@
+body {
+  font-family: "Varela Round", sans-serif;
+  background-color: #F3F7FF;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 30% 70%;
+      grid-template-columns: 30% 70%;
+}
+
+.sidesection {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 20% 45%;
+      grid-template-rows: 20% 45%;
+  height: 100vh;
+  position: relative;
+  left: -8px;
+  top: -8px;
+}
+
+.sidesection .timer {
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 100%;
+  border-radius: 20px;
+  background: #98accfa2;
+  text-align: center;
+}
+
+.sidesection .timer .time {
+  margin-top: 10px;
+  font-size: 3rem;
+  color: #ffffff;
+}
+
+.sidesection .timer .time-names {
+  word-spacing: 2.5rem;
+  color: #ffffff98;
+}
+
+.sidesection .result {
+  margin-top: 30px;
+  margin-left: 10px;
+  width: 100%;
+  border-radius: 20px;
+  background: #98accfa2;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 49.5% 0.5% 49.5%;
+      grid-template-columns: 49.5% 0.5% 49.5%;
+  text-align: center;
+}
+
+.sidesection .result .player {
+  margin-top: 10px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 20% 80%;
+      grid-template-rows: 20% 80%;
+}
+
+.sidesection .result .player .player-name {
+  font-size: 1.5rem;
+}
+
+.sidesection .result .player .player-score {
+  font-family: Verdana;
+  font-size: 6.5rem;
+}
+
+.sidesection .result .margin {
+  margin-top: 40px;
+  height: 60%;
+  background-color: #F3F7FF;
+}
+
+.sidesection .buttons {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 100%;
+      grid-template-columns: 100%;
+  margin-top: 20%;
+  height: 40px;
+}
+
+.sidesection .buttons .btn {
+  border: none;
+  margin-left: 35%;
+  border-radius: 5px;
+  color: white;
+  width: 35%;
+  -webkit-transition: background 0.5s;
+  transition: background 0.5s;
+}
+
+.game {
+  background-color: transparent;
+}
+
+.container {
+  position: relative;
+  left: 26%;
+  top: 15%;
+  display: -ms-grid;
+  display: grid;
+  height: 400px;
+  width: 400px;
+  -ms-grid-columns: 33.3% 33.3% 33.3%;
+      grid-template-columns: 33.3% 33.3% 33.3%;
+  -ms-grid-rows: 33.3% 33.3% 33.3%;
+      grid-template-rows: 33.3% 33.3% 33.3%;
+}
+
+.cell {
+  height: 120px;
+  width: 120px;
+  border: 5px solid rgba(0, 0, 0, 0.699);
+  margin: 20px;
+  font-size: 5rem;
+  line-height: 120px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.699);
+}
+/*# sourceMappingURL=main.css.map */
