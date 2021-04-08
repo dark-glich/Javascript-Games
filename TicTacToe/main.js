@@ -100,7 +100,7 @@ function EmptySquare() {
 }
 
 function BestSpot() {
-    return EmptySquare()
+    return minimax(board, player2).index;
 }
 
 function CheckTie() {
