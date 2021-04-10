@@ -1,9 +1,12 @@
-let board;
+//Variables
+var board;
 const player1 = 'X'
 const player2 = 'O'
 let player1_score = 0
 let player2_score = 0
-
+let start_button = document.getElementById('startbutton')
+let message = document.getElementById('msg')
+const cell = document.querySelectorAll('.cell');
 const winning_patterns = [
 	[0, 1, 2],
 	[3, 4, 5],
@@ -15,23 +18,86 @@ const winning_patterns = [
 	[6, 4, 2]
 ]
 
-let start_button = document.getElementById('startbutton')
+// Timer 
+var milisecond = 0
+var second  = 0
+var minute = 0
 
+let timer_running = false
 
-start_button.onclick = 
-function Start_Game(){
-    if (start_button.innerText == 'Start Playing' || start_button.innerText == 'Play Again'){
-        start_button.innerText = 'Quit Game'
-        start_button.style.backgroundColor = '#EB4848'
-        GameStarted()
-        
-    }else{
-        start_button.innerText = 'Play Again'
-        start_button.style.backgroundColor = '#4BA0F7'
-        //GameStoped()
+function StartTimer() {
+    if (timer_running == false){
+        timer_running = true
+        TimerOn()
+    }
+}
+function StopTimer() {
+    x = timer_running == true ? timer_running = false : timer_running = false
+}
+
+function TimerOn() {
+    if (timer_running == true){
+        milisecond ++
+        if (milisecond == 100){
+            second ++
+            milisecond = 0
+        }
+        if (second == 60){
+            minute ++
+            second = 0
+            milisecond = 0
+        }
+        if (milisecond < 10 && milisecond.toString().length < 2){
+            milisecond = "0" + milisecond 
+        }
+        if (second < 10 && second.toString().length < 2){
+            second = "0" + second 
+        }
+        if (minute < 10 && minute.toString().length < 2){
+            minute = "0" + minute 
+        }
+        if (minute == 60){
+            minute = 0
+            second = 0 
+            milisecond = 0
+        }
+    document.getElementById('timer').innerHTML = `${minute} : ${second} : ${milisecond}`
+    setTimeout('TimerOn()', 1)
     }
 }
 
+function ResetTimer() {
+    timer_running = false
+    document.getElementById('timer').innerHTML = `00 : 00 : 00`
+    second = 0
+    minute = 0
+    hour = 0
+}
+
+// Main Game 
+start_button.onclick = 
+function Start_Game(){
+    message.style.display = 'block'
+    message.innerText = 'You have the first turn'
+    if (start_button.innerText == 'Start Playing'){
+        start_button.innerText = 'Reset Game'
+        start_button.style.display = 'none'
+        StartTimer()
+        GameStarted()
+        
+    }else if (start_button.innerText == 'Reset Game'){
+        start_button.style.display = 'none'
+        for (var i = 0; i < cell.length; i++) {
+            document.getElementById(i).innerText = ''
+            document.getElementById(i).style.color = 'rgba(0, 0, 0, 0.699)'
+            document.getElementById(i).style.backgroundColor = 'transparent'
+        }
+        
+        ResetTimer()
+        StartTimer()
+        GameStarted()
+    }
+}
 
 function GameStarted() {
     board = [0,1,2,3,4,5,6,7,8];
@@ -42,10 +108,12 @@ function GameStarted() {
 }
 
 function CellClicked(cell){
+    message.style.display = 'none'
     if (typeof(board[cell.target.id]) == 'number'){
+        
         Play(cell.target.id, player1)
-        if(!CheckTie()){
-            Play(BestSpot(), player2)
+        if (!checkWin(board, player1) && !CheckTie()){
+            Play(EmptySquare(), player2)
         }
     } 
 }
@@ -73,41 +141,53 @@ function checkWin(board, player) {
 }
 
 function GameOver(gameWon) {
+    StopTimer()
     if (gameWon.player == player1){
+        message.style.display = 'block'
+        message.innerText = 'Congratulations! You won the game 🎉🎉'
         player1_score++
         document.getElementById('player1-score').innerText = player1_score
+        start_button.style. display = "block";
     }
 
     if (gameWon.player == player2){
+        message.style.display = 'block'
+        message.innerText = 'Ooh! You lost the game 🥺🥺'
         player2_score++
         document.getElementById('player2-score').innerText = player2_score
+        start_button.style. display = "block";
     }
 
 	for (let index of winning_patterns[gameWon.index]) {
 		document.getElementById(index).style.backgroundColor =
-			gameWon.player == player1 ? "#4BA0F7" : "#EB4848";
+		gameWon.player == player1 ? "#4BA0F7" : "#EB4848";
         document.getElementById(index).style.color = '#F3F7FF'
+        
 	}
-    const cell = document.querySelectorAll('.cell');
 	for (var i = 0; i < cell.length; i++) {
 		cell[i].removeEventListener('click', CellClicked, false);
 	}
 }
 
 function EmptySquare() {
-    emptysquare = board.filter(s => typeof(s) == 'number')
-    return emptysquare[0]
-}
-
-function BestSpot() {
-    return minimax(board, player2).index;
+    emptysquare = board.filter(s => typeof s == 'number')
+    const random = Math.floor(Math.random() * emptysquare.length);
+    return emptysquare[random]
 }
 
 function CheckTie() {
     emptysquare = board.filter(s => typeof(s) == 'number')
     if (emptysquare.length == 0){
-        console.log("vmfkv");
+        for (var i = 0; i < cell.length; i++) {
+            StopTimer()
+            message.style.display = 'block'
+            message.innerText = `Hah! It's a Tie 😲😲`
+            start_button.style. display = "block";
+			document.getElementById(i).style.backgroundColor = "#98accfa2";
+            document.getElementById(i).style.color = 'white'
+		}
         return true
     }
     return false
 }
+

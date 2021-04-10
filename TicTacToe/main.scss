@@ -32,7 +32,8 @@ body{
             color:#ffffff;
         }
         .time-names{
-            word-spacing: 2.5rem;
+            margin-left: 1rem;
+            word-spacing: 1.5rem;
             color:#ffffff98;
         }
     }
@@ -87,6 +88,40 @@ body{
 .game{
     background-color:transparent;
 }
+.statusbar{
+    
+    position:relative;
+    top:3px;
+    left:28.5%;
+    background-color: $BoxColor;
+    width:47.5%;
+    padding-left:15px;
+    text-align: center;
+    padding-top:6px;
+    height:1.5rem;
+    color:#353941a2;
+    border-radius:20px;
+    animation-name: stretch;
+    animation-duration: 1.5s; 
+    animation-timing-function: ease-out; 
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: none;
+    animation-play-state: running;
+}
+@keyframes stretch {
+    0% {
+        transform: scale(.1);
+        border-radius: 10px;
+    }
+    50% {
+        transform: scale(1);
+    }
+    100% {
+        width:47.5%;
+    }
+  }
 .container{
     position: relative;
     left: 26%;
