@@ -102,15 +102,9 @@ start_button.onclick =
 
 function GameStarted() {
   board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-<<<<<<< HEAD
-  var cell = document.querySelectorAll('.cell');
-  for (var i = 0; i < cell.length; i++) {
+  let cell = document.querySelectorAll('.cell');
+  for (let i = 0; i < cell.length; i++) {
     cell[i].addEventListener('click', CellClicked, false);
-=======
-  const cell = document.querySelectorAll('.cell');
-  for (i = 0; i < cell.length; i++) {
-    cell[i].addEventListener('click', CellClicked, false)
->>>>>>> parent of 814c5bb... transpalied using babel
   }
 }
 
@@ -172,8 +166,8 @@ function GameOver(gameWon) {
     document.getElementById(index).style.backgroundColor =
       gameWon.player == player1 ? "#4BA0F7" : "#EB4848";
     document.getElementById(index).style.color = '#F3F7FF'
-
   }
+
   for (var i = 0; i < cell.length; i++) {
     cell[i].removeEventListener('click', CellClicked, false);
   }
