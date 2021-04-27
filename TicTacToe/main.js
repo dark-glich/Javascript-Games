@@ -96,7 +96,7 @@ start_button.onclick = function Start_Game() {
 function GameStarted() {
   board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   var cell = document.querySelectorAll('.cell');
-  for (i = 0; i < cell.length; i++) {
+  for (var i = 0; i < cell.length; i++) {
     cell[i].addEventListener('click', CellClicked, false);
   }
 }
